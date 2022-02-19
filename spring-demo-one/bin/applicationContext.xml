@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- load the property files -->
+	<context:property-placeholder
+		location="classpath:sport.properties" />
+	<!-- Define your beans here -->
+
+	<!-- Define dependencies -->
+	<bean id="myFortune"
+		class="mk.iwec.springdemo.HappyFortuneService">
+
+	</bean>
+	<bean id="myCoach" class="mk.iwec.springdemo.TrackCoach">
+
+		<!-- Set conctructor injections -->
+		<constructor-arg ref="myFortune" />
+	</bean>
+	<bean id="myHandballCoach"
+		class="mk.iwec.springdemo.HandballCoach">
+		<!-- set up setter injection -->
+		<property name="fortuneService" ref="myFortune" />
+
+		<!-- inject litaeral values -->
+		<property name="emailAdress" value="${foo.emailAdress}" />
+		<property name="team" value="${foo.team}" />
+	</bean>
+
+
+</beans>
+
+
+
+
+
